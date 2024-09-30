@@ -11,33 +11,45 @@ In this reference card you will find the following useful information:
 4. The stack layout of method calling convention
 5. The RISC-V CSR registers (That we will not use in this practice)
 
+# [GNU assembler directives](https://sourceware.org/binutils/docs/as/) 
+Some general GNU assembler directives are essential when writing code.
+- We use the `.text` and `.data` assembler macros to divide our code (in the text section) and program data (in the data section).
+- We use the `.globl` assembler directive to define that a procedure label should be available for linking with other parts of the code. This is specially useful for linking assembly procedures with other files.
+- We use the `.word`,`.ascii` and `.asciz` to declare variables with numbers or strings in our `.data` section. Words are used for defining integers, while `.ascii` and `.asciz` are used for defining strings. The difference between `.ascii` and `.asciz` is that `.asciz` appends a trailing zero to all strings, while `.ascii` does not. As such, a two letter string would take 2 bytes in ascii and three bytes in asciiz.
+- We use the `.equ` to define assembler macros. Where `.equ SERIAL_PORT BASE 0xffffc000` would define a text substitution of the string `SERIAL_PORT_BASE` with the string `0xffffc000` in our code
+- We use the `.org` directive to change the program address of the following data. This directive can be used in `.text` and `.data` regions. When used in text regions it defines the starting address where the program code will be stored. When used in data regions it defines the starting address where the data is stored.
 # The [QTRVSIM](https://comparch.edu.cvut.cz/qtrvsim/app/) simulator
 
 In this practice we will use the QtRvSim RISC-V architecture simulator. This simulator will be used in multiple practices, thus, I advice you to take your time and familiarize yourself with it.
 
-When you open the QTSim simulator the following window will appear.
+When you open the QTSim simulator the following window will appear:
+
 ![[QTSIM_config.png]]
+
 Here, you should select the `No pipeline no cache` preset, as the processor we studied today is the simplest processor you can implement. Don't worry, when we complete the units `1)Microprocessors and codesign reinforcement` and `2)RISC-V based system architecture` you will be familiar with every preset presented. For now, let's select the simpler configuration to learn how assembly works. Click on the `start empty` button.
 
 ![[Processor_layout.png]]
+
 Now you are presented with all the building blocks of our processor. From program memory (where we store the instructions), the PC (Wich points to the currently-executing instruction), the registers (Where we store the data that we are operating on), the ALU (Where arithmetic and logic operations are performed) and the data memory (Where data is stored).
 
 This simulator is able to execute all RISCV32IM code, as it implements the Integer and Multiplication extensions.
 
 A window with the status of the register file can be opened clicking -> `Windows\Registers`
 ![[Registers.png]]
+
 A window with the program code can be open by clicking -> `Windows\Program` resulting in the window below opening. The currently executing instruction is highlighted.
+
 ![[Pasted image 20240930133908.png]]
+
 However, using this window to debug the assembler code can prove hard, as some instructions are translated into pseudoinstructions, breaking your code structuring. To ease debugging we can break up or code into sections with labels such as the above code, where the code is broken down into two labeled sections: `start`and `final`
 
 To go into the assembler code corresponding to the *final* section we use the `Machine\Show Symbol` feature. Selecting the `final` symbol and clicking `show program`
 
 ![[Pasted image 20240930134351.png]]
-
-Furthermore, one can set [breakpoints](https://en.wikipedia.org/wiki/Breakpoint) in their assembler program by clicking in the Bp field, as shown below. If the program is ran with the `Machine\Run` command and encounters an instruction with a breakpoint, it's execution will pause. Breakpoints are useful to examine the program behavior in certain sections of code where the programmer suspects a bug is present.
-
+Furthermore, one can set [breakpoints](https://en.wikipedia.org/wiki/Breakpoint) in their assembler program by clicking in the Bp field, as shown below. If the program is ran with the `Machine\Run` command and encounters an instruction with a breakpoint, it's execution will pause. Breakpoints are useful to examine the program behavior in certain sections of code where the programmer suspects a bug is pressent.
 ![[Pasted image 20240930145136.png]]
 
+# Exercises
 ## Exercise 1. first assembly program
 
 Let's start reading and programming assembly code.
