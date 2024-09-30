@@ -3,9 +3,6 @@ title: RISC-V assembly programming
 draft: false
 tags:
 ---
- 
-# Practice 1. RISC-V assembly programming
-
 In this session you should be provided with a [RISC-V programming reference card](https://cass-kul.github.io/files/riscv-card.pdf).
 In this reference card you will find the following useful information:
 1. RV32I instructions
@@ -29,10 +26,14 @@ This simulator is able to execute all RISCV32IM code, as it implements the Integ
 
 A window with the status of the register file can be opened clicking -> `Windows\Registers`
 ![[Registers.png]]
+A window with the program code can be open by clicking -> `Windows\Program` resulting in the window below opening. The currently executing instruction is highlighted.
+![[Pasted image 20240930133908.png]]
+However, using this window to debug the assembler code can prove hard, as some instructions are translated into pseudoinstructions, breaking your code structuring. To ease debugging we can break up or code into sections with labels such as the above code, where the code is broken down into two labeled sections: *start* and *final*
+To go into the assembler code corresponding to the *final* section we use the `Machine\Show Symbol` feature. Selecting the *final* symbol and clicking *show program*
+![[Pasted image 20240930134351.png]]
+Furthermore, one can set [breakpoints](https://en.wikipedia.org/wiki/Breakpoint) in their assembler program by clicking in the Bp field, as shown below. If the program is ran with the `Machine\Run` command and encounters an instruction with a breakpoint, it's execution will pause. Breakpoints are useful to examine the program behavior in certain sections of code where the programmer suspects a bug is pressent.
+![[Pasted image 20240930145136.png]]
 
-==Maybe include peripheral support? Too much for a practice?==
-
-==Include tutorial on the following features: Program debugging using breakpoints, navigation to function code using the show symbol feature ==
 ## Exercise 1. first assembly program
 
 Let's start reading and programming assembly code.
