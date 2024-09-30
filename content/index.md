@@ -1,6 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Index
 ---
-
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+This is the webpage of the laboratory sessions of the [NANO](https://nano.upv.es/) Microprocessors and codesign project. The following labs are currently online:
+- [[RISC-V assembly programming]]
