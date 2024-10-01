@@ -46,7 +46,9 @@ However, using this window to debug the assembler code can prove hard, as some i
 To go into the assembler code corresponding to the *final* section we use the `Machine\Show Symbol` feature. Selecting the `final` symbol and clicking `show program`
 
 ![[Pasted image 20240930134351.png]]
+
 Furthermore, one can set [breakpoints](https://en.wikipedia.org/wiki/Breakpoint) in their assembler program by clicking in the Bp field, as shown below. If the program is ran with the `Machine\Run` command and encounters an instruction with a breakpoint, it's execution will pause. Breakpoints are useful to examine the program behavior in certain sections of code where the programmer suspects a bug is pressent.
+
 ![[Pasted image 20240930145136.png]]
 
 # Exercises
@@ -112,11 +114,48 @@ list:
 
 **Write your solution into a file called *exercise2.s* and attach it in poliformat.**
 ## Exercise 3: Calling conventions and stack
-Let's take the case that I am writing an assembly program where I need to call a function `foo`.  Which registers should I save before doing so? Where should I save such registers? Remember consulting the provided [reference card](https://cass-kul.github.io/files/riscv-card.pdf) calling conventions. Write the necessary procedure to call and return from foo, use the template below:
+Let's take the case that I am writing an assembly program where I need to call a function `foo`.  Which registers should I save before doing so? Where should I save such registers? Remember consulting the provided [reference card](https://cass-kul.github.io/files/riscv-card.pdf) calling conventions. Write the necessary procedure to call and return from foo preserving the `t0`,`t3`, `a0` and `a3`, use the template below:
 ```
-#WRITE YOUR CODE HERE
+.text
+.globl _start
+# Set all registers to some value
+li t0, 1
+li t3, 2
+li a0, 3
+li a3, 4
+
+## WRITE YOUR CODE to save the previously set registers here
+...
 jal foo
-#WRITE YOUR CODE HERE
+## WRITE YOUR CODE to restore the saved registers here
+...
+
+
+# Check if all registers have the correct value
+addi t0, t0, -1
+bnez t0, error
+addi t3, t3, -2
+bnez t3, error
+addi a0, a0, -3
+bnez a0, error
+addi a3, a3, -4
+bnez a3, error
+
+#pass:
+li a7, 97          #; Exit syscall
+li a0, 0           #; Exit without error
+ecall              #; Exit, success
+error:
+li a7, 97          #; Exit syscall
+li a0, 1           #; Exit with error
+ecall              #; Exit, failure
+
+foo:
+    addi t0, t0, 1
+    addi t3, t3, 1
+    addi a0, a0, 1
+    addi a3, a3, 1
+    ret
 ```
 **Write your soluition into a file called *exercise3.s* and attach it in poliformat**
 ## Exercise 4: [Bubble sort](https://en.wikipedia.org/wiki/Bubble_sort)
