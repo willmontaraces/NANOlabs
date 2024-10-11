@@ -1,6 +1,6 @@
 ---
 title: Simple RISC-V monocycle processor
-draft: false
+draft: true
 tags:
 ---
  In this practice session we will implement the simple processor which we have seen in the corresponding theory session. Such processor is derived from the descriptions on the Patterson and Hennesy "Computer Organization and Design, RISC-V edition" Chapter 4.[1-4].
