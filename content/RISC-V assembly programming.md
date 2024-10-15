@@ -47,7 +47,7 @@ To go into the assembler code corresponding to the *final* section we use the `M
 
 ![[Pasted image 20240930134351.png]]
 
-Furthermore, one can set [breakpoints](https://en.wikipedia.org/wiki/Breakpoint) in their assembler program by clicking in the Bp field, as shown below. If the program is ran with the `Machine\Run` command and encounters an instruction with a breakpoint, it's execution will pause. Breakpoints are useful to examine the program behavior in certain sections of code where the programmer suspects a bug is present.
+Furthermore, one can set [breakpoints](https://en.wikipedia.org/wiki/Breakpoint) in their assembler program by clicking in the Bp field, as shown below. If the program is ran with the `Machine\Run` command and encounters an instruction with a breakpoint, it's execution will pause. Breakpoints are useful to examine the program behavior in certain sections of code where the programmer suspects a bug is pressent.
 
 ![[Pasted image 20240930145136.png]]
 
@@ -87,6 +87,7 @@ In our simulator, let's create a new program by clicking -> `File\New source` an
 In this file, paste the code presented in [[#^ex1code]]. Then, open the register file and memory contents in `Windows\Registers` and `Windows\Memory`
 Run the program and check the values in registers `s0`,`s1` and `s2` and the value of the memory address of `P`. Are this values what you expected?
 
+**Upload your answers in a file named exercise1.txt to poliformat.**
 ## Exercise 2: control flow
 
 Let's check your knowledge of control flow by implementing the following C++ code into assembly:
@@ -256,14 +257,12 @@ swap_space:
 	.word 0, 1
 ```
 **Write your solution into *exercise4.s* and attach it in poliformat**
-
-==maybe add better testing code that prints what testcase failed, however, too much code?==
 ## Exercise 5: ASM bubble sort with C++ code
 Now we provide the testcase in C++. Adapt the previously-coded bubble sort algorithm so that it can be integrated into the following C++ program. Compile it and execute it in the simulator.
 
 **Remember, if you want to use callee saved registers you need to push them into the stack.**
 
-main.c
+main.cpp
 ```cpp
 #include <iostream>
 
@@ -290,16 +289,24 @@ int main() {
 
     // Verification: compare the sorted list with the expected list
     if (verify(list, expected_list, size)) {
-        std::cout << "List sorted correctly!" << std::endl;
+        __asm__(
+	        "li a7, 97\n\t"
+	        "li a0, 0\n\t"
+	        "ecall"
+        );
         return 0; // Success
     } else {
-        std::cout << "List sorting failed!" << std::endl;
+        __asm__(
+	        "li a7, 97\n\t"
+	        "li a0, 1\n\t"
+	        "ecall"
+        );
         return 1; // Failure
     }
 }
 ```
 
-bubsort.s
+bubsort.S
 ```armasm
 .section .text
 .global bubsort
@@ -317,6 +324,50 @@ bubsort:
 **Attach bubsort.s in poliformat**
 
 To compile this program, we will need a C++ compiler. However, the windows machines in our laboratory are x86, and we want to compile RISC-V code. That's why we need a crosscompiler.
-Crosscompilers are tools that are able to produce code for different architectures to those that they are compiled for.
+Crosscompilers are tools that are able to produce code for different architectures to those that they are compiled for. In this case, our host architecture is a x86 computer, while our target architecture is RISC-V. We provide the RISC-V gnu toolchain to compile RISC-V binaries from our x86 architecture. All toolchain utilities are accessible from the terminal with the prefix riscv64-unknown-elf-(program_name).exe
+Once your `bubsort.s` code is completed create a new file in the directory where you stored your `main.cpp` and `bubsort.S` with the name `crt0local.S` with the following contents
+```
+/* minimal replacement of crt0.o which is else provided by C library */
 
-==añadir inline assembly==
+.globl main
+.globl _start
+.globl __start
+
+.option norelax
+
+.text
+
+__start:
+_start:
+        .option push
+        .option norelax
+        la gp, __global_pointer$
+        .option pop
+        la      sp, __stack_end
+        addi    a0, zero, 0
+        addi    a1, zero, 0
+        jal     main
+quit:
+        addi    a0, zero, 0
+        addi    a7, zero, 93  /* SYS_exit */
+        ecall
+
+loop:   ebreak
+        beq     zero, zero, loop
+
+.bss
+
+__stack_start:
+        .skip   4096
+__stack_end:
+
+.end _start
+```
+This file is used to set all needed variables for calling our cpp main function.
+Once you have all three files navigate with your console into the target directory and compile your program using the following command:
+`riscv64-unknown-elf-gcc.exe -march=rv32i -mabi=ilp32 -nostdlib .\crt0local.S .\bubsort.S .\main.cpp -lgcc -o bubsort.elf`
+This will produce the `bubsort.elf` binary in your directory. To disassemble this RISC-V binary and see the compiled contents execute the following command:
+`riscv64-unkown-elf-objdump.exe -S bubsort.elf > my_compiled_code.S`
+Execute the `bubsort.elf` binary in the simulator by clicking `File->New simulation->Elf executable (your file) -> Load machine` and verify that everything works correctly.
+
+**Zip your `main.cpp, bubsort.S, crt0local.S and bubsort.elf` into a zip file called `exercise5.zip` and upload it to Poliformat.**
