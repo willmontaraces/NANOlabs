@@ -158,7 +158,7 @@ foo:
     addi a3, a3, 1
     ret
 ```
-**Write your soluition into a file called *exercise3.s* and attach it in poliformat**
+**Write your solution into a file called *exercise3.s* and attach it in poliformat**
 ## Exercise 4: [Bubble sort](https://en.wikipedia.org/wiki/Bubble_sort)
 
 Bubble sort is a sorting algorithm known for it's simplicity. It sorts an array of numbers in an ascending or descending order. 
