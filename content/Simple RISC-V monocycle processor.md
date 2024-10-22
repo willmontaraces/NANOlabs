@@ -6,11 +6,11 @@ tags:
 In this practice session we will implement the simple processor which we have seen in the corresponding theory session. Such processor is derived from the descriptions on the Patterson and Hennesy "Computer Organization and Design, RISC-V edition" Chapter 4.[1-4].
 Such processor provides support for the following RISC-V instructions `LW`,`SW`,`BEQ`,`ADD`,`SUB`,`AND`,`OR`.
 
-The tentative pipeline of such processor is presented in the below image, take your time to understand the different components and their interconnections: 
+The tentative pipeline of the presented processor is shown in the below image, take your time to understand the different components and their interconnections: 
 ![[Monocycle_PH_practicas_plain.svg]] 
 
 # Functional units
-In this practice session we will work with a system verilog representation of the processor pictured above. Such representation is available in poliformat for you to complete in this practice. 
+In this practice session we will work with a system verilog representation of the processor pictured above. The baseline code for this processor can be downloaded in poliformat.
 ## Instruction memory
 Takes in a read address corresponding to the PC and returns an instruction. It is also referenced as the processor ROM. In this processor representation, instruction memory is read asynchronously with the PC address. Memory is word/aligned as this simple processor does not support compressed instructions
 ## Register unit
@@ -64,30 +64,20 @@ Produces the following ***Outputs***:
 
 
 ## ALUcontrol unit
-We can generate the 4-bit ALU control input using a small control unit that has as inputs the funct7 and funct3 fields of the instruction and a 2-bit control field, which we call ALUOp. ALUOp indicates whether the operation to be performed should be add (00) for loads and stores, subtract and test if zero (01) for beq, or be determined by the operation encoded in the funct7 and funct3 fields (10). 
 
-Determining ALUcontrol output from funct7, funct3 and ALUOp inputs:
+We can generate the 4-bit ALU control input using a small control unit that has as inputs the funct7 and funct3 fields of the instruction and a 2-bit control field, which we call ALUOp. ALUOp indicates whether the operation to be performed should be add (00) for loads and stores, subtract and test if zero (01) for beq, or be determined by the operation encoded in the funct7 and funct3 fields (10).  This behavior is encoded in the following table:
 
-| **Inst Opcode** | **ALUOp** | **Operation** | **Funct7** | **Funct3** | **ALU action** | **ALU control output** |
-| :-------------: | :-------: | :-----------: | :--------: | :--------: | :------------: | :--------------------: |
-|       lw        |    00     |      lw       |     x      |     x      |      add       |          0010          |
-|       sw        |    00     |      sw       |     x      |     x      |      add       |          0010          |
-|       beq       |    01     |      beq      |     x      |     x      |      sub       |          0110          |
-|     R-type      |    10     |      add      |  0000000   |    000     |      add       |          0010          |
-|     R-type      |    10     |      sub      |  0100000   |    000     |      sub       |          0110          |
-|     R-type      |    10     |      and      |  0000000   |    111     |      and       |          0000          |
-|     R-type      |    10     |      or       |  0000000   |    110     |       or       |          0001          |
-
-
+| ALUOp | Operation                       |
+| ----- | ------------------------------- |
+| 00    | Add                             |
+| 01    | Sub                             |
+| 10    | Determined by funct3 and funct7 |
+Full ALUControl unit behaviour is defined in Exercise 2.
 # Exercises
 ## Exercise 1. Generate the Control signals of the processor
-Take the description of the control unit presented in the previous section and define it's outputs from the four different instruction opcodes: `R-format`, `LW`, `SW`, `BEQ`. Take the instruction opcodes from Table 19.3 of [The RISC-V spec](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf) .The ALUOp output is defined in the table below
+Take the description of the control unit presented in the previous section and define it's outputs from the four different instruction opcodes: `R-format`, `LW`, `SW`, `BEQ`. Take the instruction opcodes from Table 19.3 of [The RISC-V spec](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf) .The ALUOp output is defined in the [[Simple RISC-V monocycle processor#ALUcontrol unit]]
 
-| Instruction Opcode       | ALUOp | Actual operation         |
-| ------------------------ | ----- | ------------------------ |
-| lw/sw                    | 00    | add                      |
-| beq/sub                  | 01    | substract                |
-| Determined by funct[3/7] | 10    | calculated at ALUControl |
+
 Fill the following table, create a snapshot of it and present it as `exercise1.png` in poliformat. If in doubt ask the professor, this step is crucial in the design of your processor.
 
 | Input/output | Signal name | R-format                                                 | LW                                                       | SW                                                       | BEQ                                                      |
