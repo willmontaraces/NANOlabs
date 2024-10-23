@@ -72,6 +72,7 @@ We can generate the 4-bit ALU control input using a small control unit that has 
 | 00    | Add                             |
 | 01    | Sub                             |
 | 10    | Determined by funct3 and funct7 |
+
 Full ALUControl unit behaviour is defined in Exercise 2.
 # Exercises
 ## Exercise 1. Generate the Control signals of the processor
