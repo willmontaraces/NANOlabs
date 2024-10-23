@@ -116,7 +116,7 @@ Open the Vivado project provided from poliformat. With the Vivado GUI open the C
 Implement the ALUControl module located in the *alu_control.sv* file so that outputs are driven as described in [[Simple RISC-V monocycle processor#Exercise 2. Generate the ALUControl output signals]]
 
 ## Exercise 5. Implementing the ALU module
-Implement the ALU module so that it follows the behavior described in [[Simple RISC-V monocycle processor#ALU]]
+Implement the ALU module located in the *ph_alu.sv* file so that it follows the behavior described in [[Simple RISC-V monocycle processor#ALU l]]
 
 ## Exercise 6. Implementing the immediate generator
 The immediate generator (located in file imm.sv) generates immediates using the instruction type and immediate fields to generate 32-bit integers.
@@ -136,10 +136,10 @@ final_value: .space 100
 # a1 -> 4, incrementing storage value
 
 .text
-lw a0, 0(zero)    # a0 = 4
-lw a1, 0(zero)    # a1 = 4
-lw t0, 4(zero)    # t0 = 1
-add t1, t0, zero  # t1 = 1
+add a0, zero, zero  # a0 = 0
+lw a1, 0(zero)      # a1 = 4
+add t0, zero, zero  # t0 = 0
+lw t1, 4(zero)      # t1 = 1
 
 loop: 
 sw t0, 0(a0)	#store t0
