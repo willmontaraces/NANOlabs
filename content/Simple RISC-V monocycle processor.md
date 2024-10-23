@@ -117,6 +117,12 @@ Implement the ALUControl module located in the *alu_control.sv* file so that out
 
 ## Exercise 5. Implementing the ALU module
 Implement the ALU module so that it follows the behavior described in [[Simple RISC-V monocycle processor#ALU]]
+
+## Exercise 6. Implementing the immediate generator
+The immediate generator (located in file imm.sv) generates immediates using the instruction type and immediate fields to generate 32-bit integers.
+![[TypesOfInstructions.png]]
+Each immediate instruction type has different related opcodes and immediate values codified in different bit fields. The immediate generator must generate a full 32-bit integer from the immediate field.
+Fill the immediate generator system verilog code so that it generates immediates for the load and store instructions.
 ## Testing the processor
 Validate your implementations by running the provided testbench. This testbench prints the fibonacci succession in the processor ram by executing the following code:
 ```
