@@ -264,8 +264,6 @@ Now we provide the testcase in C++. Adapt the previously-coded bubble sort algor
 
 main.cpp
 ```cpp
-#include <iostream>
-
 // Declaration of the external bubble sort function in assembly
 extern "C" void bubsort(int* list, int size);
 
