@@ -258,6 +258,8 @@ swap_space:
 ```
 **Write your solution into *exercise4.s* and attach it in poliformat**
 ## Exercise 5: ASM bubble sort with C++ code
+If you want to compile this program and are on a windows computer, please download the RISC-V crosscompiler [from this link](https://sysprogs.com/getfile/1107/risc-v-gcc10.1.0.exe) and execute all commands from windows PowerShell.
+
 Now we provide the testcase in C++. Adapt the previously-coded bubble sort algorithm so that it can be integrated into the following C++ program. Compile it and execute it in the simulator.
 
 **Remember, if you want to use callee saved registers you need to push them into the stack.**
