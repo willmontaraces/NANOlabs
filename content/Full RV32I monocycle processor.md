@@ -3,7 +3,7 @@ title: (Almost)Full RV32I monocycle processor
 draft: false
 tags:
 ---
- In this practice session we will implement the RV32I core that we have seen in the theory session. The final schematic of such core is presented in the following image:
+In this practice session we will implement the RV32I core that we have seen in the theory session. The final schematic of such core is presented in the following image:
 ![[Monocycle_PH_final_plain.svg]]
 
 ## New Vivado project with changes
@@ -45,6 +45,7 @@ Fill the following table with the control signals of the processor. Optionally, 
 |     *U-LUI*     | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> |
 |    *U-AUIPC*    | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> |
 |      *JAL*      | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> | <input type="text" maxlength="1" style="width: 30px;" /> |
+
 Upload a capture of this table called Exercise1.png into the poliformat task.
 
 ## Exercise 2. Generate the ALUControl output signals
@@ -62,6 +63,7 @@ Given the following table describing ALU op inputs:
 | XOR                  | 0111 |
 | ShiftRightLogical    | 1000 |
 | ShiftRightArithmetic | 1001 |
+
 Create a table that given the `ALUOp`, `Funct3` and `Funct7` inputs generates the ALUControlOutBits output. Fill the following table or optionally create a google_docs/excel table with the following fields:
 
 | ALUOp                                                    | Funct3                                                   | Funct7                                                    | AluControlOutOperation                      | AluControlOutBits                                          |
@@ -88,6 +90,7 @@ Create a table that given the `ALUOp`, `Funct3` and `Funct7` inputs generates th
 | <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="3" style="width: 40px;" /> | <input type="text" maxlength="7" style="width: 100px;" /> | <input type="text" style="width: 200px;" /> | <input type="text" maxlength="4"  style="width: 100px;" /> |
 | <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="3" style="width: 40px;" /> | <input type="text" maxlength="7" style="width: 100px;" /> | <input type="text" style="width: 200px;" /> | <input type="text" maxlength="4"  style="width: 100px;" /> |
 | <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="3" style="width: 40px;" /> | <input type="text" maxlength="7" style="width: 100px;" /> | <input type="text" style="width: 200px;" /> | <input type="text" maxlength="4"  style="width: 100px;" /> |
+
 Upload a capture of this table called Exercise2.png into the poliformat task. Optionally upload your google_docs/excel table into the task with the name Exercise2.[extension]
 
 ## Exercise 3. Control
