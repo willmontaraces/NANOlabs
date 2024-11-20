@@ -6,6 +6,23 @@ tags:
 In this practice session we will implement the RV32I core that we have seen in the theory session. The final schematic of such core is presented in the following image:
 ![[Monocycle_PH_final_plain.svg]]
 
+## All RV32I opcodes and their meaning
+As you might remember, we extensively used a RV32I opcode list in our theory sessions for codifying control signals and understanding the datapath of the processor. Below a list of the opcodes that the processor that we implement in this practice supports:
+
+
+| Opcode  | Action | Format    | Notes                                           |
+| ------- | ------ | --------- | ----------------------------------------------- |
+| 0110011 |        | R-format  | *Funct3 and Funct7 codify action*               |
+| 0000011 | Load   | I-format  | *Funct3 codifies type of load*                  |
+| 0010011 | Arith  | I-format  | *Arithmetic operations with immediates*         |
+| 1100111 | JALR   | I-format  | *PCabsolute, but immediates codify jump offset* |
+| 0100011 |        | S-format  | *Funct3 codifies the length*                    |
+| 1100011 |        | SB-format | *Relative branches*                             |
+| 0110111 | LUI    | U-format  |                                                 |
+| 0010111 | AUIPC  | U-format  |                                                 |
+| 1101111 | JAL    | UJ-format | *20-bit immediate for offset*                   |
+
+
 ## New Vivado project with changes
 Download the new Vivado project from Poliformat. This vivado project contains the modified processor structure, with the new `Data memory` module and all the RISCV-core glue logic implemented. Take a look at BranchVal generation inside `riscv_core.sv`. In this file you should also notice the inclusion of the new multiplexors.
 
@@ -28,7 +45,9 @@ To account for the new supported instructions, we adapted the ALUOp behavior as 
 | 01    | I-format  |
 | 10    | R-format  |
 | 11    | SB-format |
+
 **BEWARE**, the `01` ALUOp encoding has changed from substract to I-format instructions. This is due to the need to differentiate I-format instructions and R-format instructions. As I-format instructions (generally) don't encode the operation in the funct7 field.
+
 
 # Exercises
 ## Exercise 1. Generate the control signals of the processor
