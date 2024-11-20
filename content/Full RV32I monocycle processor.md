@@ -109,6 +109,7 @@ Create a table that given the `ALUOp`, `Funct3` and `Funct7` inputs generates th
 | <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="3" style="width: 40px;" /> | <input type="text" maxlength="7" style="width: 100px;" /> | <input type="text" style="width: 200px;" /> | <input type="text" maxlength="4"  style="width: 100px;" /> |
 | <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="3" style="width: 40px;" /> | <input type="text" maxlength="7" style="width: 100px;" /> | <input type="text" style="width: 200px;" /> | <input type="text" maxlength="4"  style="width: 100px;" /> |
 | <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="3" style="width: 40px;" /> | <input type="text" maxlength="7" style="width: 100px;" /> | <input type="text" style="width: 200px;" /> | <input type="text" maxlength="4"  style="width: 100px;" /> |
+| <input type="text" maxlength="2" style="width: 60px;" /> | <input type="text" maxlength="3" style="width: 40px;" /> | <input type="text" maxlength="7" style="width: 100px;" /> | <input type="text" style="width: 200px;" /> | <input type="text" maxlength="4"  style="width: 100px;" /> |
 
 Upload a capture of this table called Exercise2.png into the poliformat task. Optionally upload your google_docs/excel table into the task with the name Exercise2.[extension]
 
