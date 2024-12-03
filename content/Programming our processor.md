@@ -4,7 +4,7 @@ draft: false
 tags:
 ---
 ## Preamble and setup
-Until now we have learned how to program in RV32I assembly [[Practice 1. RISC-V assembly programming]] and implemented a RV32I singlecycle processor [[Simple RISC-V monocycle processor]] So the next logical step is to write C++ programs to execute in our home-made processor.
+Until now we have learned how to program in RV32I assembly [[RISC-V assembly programming]] and implemented a RV32I singlecycle processor [[Simple RISC-V monocycle processor]] So the next logical step is to write C++ programs to execute in our home-made processor.
 
 Our homemade processor is not very advanced, as such RAMs and ROMs are implemented in the FPGA fabric, this is very fast (convenient for doing everything in a single cycle) but consumes a lot of resources. As such, our processor is limited to 1536 bytes of storage in our FPGA. To make efficient use of such memory we will open our previous practice completed CPU and perform some modifications.
 
