@@ -42,6 +42,7 @@ Our homemade processor is not very advanced, as such RAMs and ROMs are implement
 3. Open the `riscv_gpio.sv` file and add the new parameters
 	````systemverilog
 	   parameter w=32,d_ram=128, d_rom=128,r=32;
+	   localparam a=$clog2(d_ram);
 	````
 	Then, change the RISCV core instance with the ROM amount
 	```systemverilog
