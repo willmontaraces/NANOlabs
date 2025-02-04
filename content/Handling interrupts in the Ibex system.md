@@ -12,7 +12,7 @@ You must **answer the questions in a file named [your_name]_1.txt** and attach t
 - Will this setup for connecting the UART work in a multicore system?
 - Check the interrupt signal from your UART located in `rtl/system/uart.sv`. When is it asserted and deasserted? Is this behavior the described in the theory session?
 ### Exercise 2. Reading from the UART using polling
-Take the following main code and adapt it to use your puts and putchar functions. You can do so by making my `puts_long` and `putchar_long` call your puts and putchar functions. If you do not know how to do this, ask the professor.
+Take the following main code and adapt it to use your puts and putchar functions. You can do so by replacing this code calls by your `puts_long` and `putchar_long` equivalent functions. If you do not know how to do this, ask the professor.
 ```c
 #include <stdbool.h>
 
@@ -103,8 +103,9 @@ Then, think about the following questions:
 ### Exercise 3. Reading from the UART using interrupts
 Now we will interface with the UART using interrupts.
 Take a look at the install_exception_handler function inside of `sw/c/common/demo_system` and answer the following questions:
+- Describe what does the function do. Why are we checking offset bounds? What is the content of the jmp_ins variable at the end of the execution.
 - Are we using standard or vectored interrupt addressing?
-- What does the code in line 95 do? Why is it necessary?
+
 **Answer these questions in a file named [your_name]3.txt but do not upload it to poliformat yet, there are more questions**
 
 Now let's use this function to install a handler to the UART interruption.
@@ -122,3 +123,6 @@ Then, answer the following questions:
 - What is now the delay between text input and output?
 - Change ARRAY_SIZE to 300, what happens with your UART output?
 **Answer these questions on the previous [your_name]3.txt and upload it to poliformat**
+
+### Extra exercise. Direct vectoring mode
+As we have explained in the previous theory session there are two interrupt modes. Direct, and vectored. Adapt your code to use the direct vectoring mode instead of the default mode. This exercise is non-deliverable, but if you did it I would appreciate a report of how you did it and if you enjoyed it ;)
