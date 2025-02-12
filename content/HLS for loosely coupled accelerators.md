@@ -116,7 +116,7 @@ int main() {
 ```
 Then, open the `hls_config.cfg` file and set the `krnl_vadd` function as the top function to be synthesized.
 ## Exercise 1. Analyzing the code
-The kernel is supposed to do the vector multiplication of two vectors, saving the result in a new vector. Check the testbench to understand the software behavior. However, our hardware design team has introduced two bugs in the kernel design. Find them, fix them and report them in a file named `yourname_ex1.txt`. Once you fix them you should have the testbench passing.
+The kernel is supposed to do the vector addition of two vectors, saving the result in a new vector. Check the testbench to understand the software behavior. However, our hardware design team has introduced two bugs in the kernel design. Find them, fix them and report them in a file named `yourname_ex1.txt`. Once you fix them you should have the testbench passing.
 You can run the testbench by running the C simulation in Vitis.
 ## Exercise 2. Analyzing the synthetized code
 Run the C synthesis. Open the Synthesis report and answer the following questions in a file named `yourname_ex2.txt`:
