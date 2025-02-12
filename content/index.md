@@ -9,3 +9,4 @@ This is the webpage of the laboratory sessions of the [NANO](https://nano.upv.es
 - [[Programming our processor]]
 **HW/SW codesign**
 - [[Handling interrupts in the Ibex system]]
+- [[HLS for loosely coupled accelerators]]
