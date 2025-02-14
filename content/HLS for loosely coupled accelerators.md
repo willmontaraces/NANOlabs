@@ -4,7 +4,7 @@ draft: false
 tags:
 ---
 In this lab session we will be exploring the creation of HLS accelerators in AMD Xilinx platforms. We will make a special focus on the memory interfaces of such accelerators, and the paradigm that AMD uses to communicate with them, focusing on how we can integrate them into a SoC.
-### Setting up the environment
+## Setting up the environment
 Open Vitis and create a new `HLS` component with a target hardware part of `xc7k325tlffg900-2L` and a `100MHz` clock. With a `Vivado IP Flow Target`and a `package.output.format` of `Generate RTL, skip packaging`.
 *This tutorial will use files created by Xilinx and with an Apache, Version 2.0 license. Such license is located at http://www.apache.org/licenses/LICENSE-2.0* 
 Then create a new source file named `krnl_vadd.cpp` with the following contents.
@@ -143,7 +143,7 @@ Append to `yourname_ex4.doc` your answers to the following questions:
 - In which instance of time is the first AXI read data transaction performed?
 - Which address does this transaction access to?
 - What are the characteristics of this address read transaction? (size of bus, burst mode, burst length, id)
-- Provide a capture of your Vivado program that shows the instant where the first address read transaction happens.
+- Provide a capture of your vivado program that shows the instant where the first address read transaction happens.
 - In which instance of time does the first address write happen?
 - In which instance of time does the first write happen?
 - What value is transmitted in the first write?
