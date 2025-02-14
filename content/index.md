@@ -1,5 +1,5 @@
 ---
-title: Index
+title: Microprocessors and codesign labs
 ---
 For questions mail pabance@upv.es
 
