@@ -14,3 +14,4 @@ This is the webpage contains the laboratory sessions of the [NANO](https://nano.
 **HW/SW codesign**
 - [[Handling interrupts in the Ibex system]]
 - [[HLS for loosely coupled accelerators]]
+- 
