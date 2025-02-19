@@ -58,7 +58,7 @@ Then update the number of managers and subordinates of the AXI and AXI_lite xbar
 
 Then, go to the wrapper folder and check the `xbar_lite_wrapper.sv` and `xbar_wrapper.sv`, then answer the following questions in a file named `yourname_questions.txt`
 - Why does the AXI4 crossbar wrapper only have one address rule?
-- Why does the AXI_lite crossbar have four address rules?
+- Why does the AXI_lite crossbar have six address rules?
 - What is the address range of our accelerator?
 - Which peripheral would the processor access if it accesses address `0xfffc0750`?
 - Which peripheral would the processor access if it accesses address `0x50000000`?
