@@ -3,7 +3,7 @@ title: Integrating accelerators into the Selene SoC
 draft: false
 tags:
 ---
- In this lab session we will create an HLS accelerator in C++, then we will synthetize such accelerator and integrate into a commercial SoC. Finally we will write some software to interact with such an accelerator and compare the performance of this accelerator with that of the CPU running some code that performs an analogous function.
+In this lab session we will create an HLS accelerator in C++, then we will synthetize such accelerator and integrate into a commercial SoC. Finally we will write some software to interact with such an accelerator and compare the performance of this accelerator with that of the CPU running some code that performs an analogous function.
 ## Understanding the target SoC and accelerator integration
 The SoC that we will be integrating our accelerator in is the SELENE H2020 SoC represented in the bellow figure. As you can see, there are several crossed out elements, in specific, 5 cores and the L2 cache. They are crossed as they are disabled in your version of the SoC to speed up the simulation process. If you want you can enable them using the `config.vhd` file.
 
@@ -11,23 +11,17 @@ The SoC that we will be integrating our accelerator in is the SELENE H2020 SoC r
 As you can observe, there is one accelerator instantiated in the above figure. That is the accelerator you will need to create and instantiate in the SoC. This accelerator is configured using the AXI_lite network. This network is accesed using an AHB to AXI_lite bridge represented in the figure as the AXI_lite block. Then, AXI_lite information travels through the AXI_lite xbar, where it is routed to its destination using a memory mapping mechanism.
 Now that we understand how the accelerator configuration connection is configured, I want to take a look at the accelerator connections to the AXI xbar. They appear as AXI connections in this figure, but, in reality, they are special connections.
 As the accelerator that we will program consumes 32-bit integers, it instantiates 32-bit wide AXI interfaces. However, our NoC uses 128-bit wide AXI interfaces. To adapt our accelerators we use AXI UP/Downsizers that are automatically instantiated when using the `axi_dw_wrapper`module found at `interconnect\libnoc\axi_width_converter.vhd`
-
-![[axi_up_down_plain.png|400]]
+![[axi_up_down_plain.png|300]]
 
 # Exercises
 ## Exercise 1. Generating an HLS kernel
-Using Vitis HLS and the previous session knowledge create an accelerator that takes two vectors (as pointers) and a length argument, and produces the dot product as a result. The dot product produced should be stored in the control registers to be read by the user using the control interface. 
-
-Both vectors should be read using the AXI4 interface, with ports named `gmem_1` and `gmem_2` respectively.
+Using Vitis HLS and the previous session knowledge create an accelerator that takes two vectors (as pointers) and a length argument, and produces the dot product as a result. The dot product produced should be stored in the control registers to be read by the user using the control interface. Both vectors should be read using the AXI4 interface, with ports named `gmem_1` and `gmem_2` respectively.
 Your HLS kernel interface should be the following:
 `uint32_t dot_prod_kernel(uint32_t* a, uint32_t* b, uint32_t length){}`
-
 Write your kernel and it's testbench, then test it and synthetize it.
 Once you have tested your kernel, synthetize it and check if it implements DSPs, if it does force Vitis to not do so by using the following pragma
 `#pragma HLS RESOURCE variable=result core=Mul_LUT`
-
 While DSPs are very beneficial for performance, we will be using a 3rd party simulator, where DSP behavior is not defined, as such, if any DSP is instantiated our accelerator will not work.
-
 **Upload your dot_prod_kernel.cpp file to poliformat as yourname_dot_prod_kernel.cpp**
 You will need the synthetized kernel files, so don't close Vitis HLS yet.
 ## Exercise 2. Integrating the accelerator into our target SoC
@@ -60,7 +54,7 @@ Check that a file named `vlogsyn.txt` is created inside the `dotProd` folder con
 
 Now we need to instantiate our accelerator in the `selene_core.vhd` file. Open it and read the code from line 593 until the end of the instantiation. Replace the --Number-- comments with the actual port number for your accelerator to go into.
 
-Then update the number of managers and subordinates of the AXI and AXI_lite xbars in the `config.vhd` file in the `selene_xilinx_vcu118` folder. You will need to modify the `CFG_AXI_N_INITIATORS` and `CFG_AXI_N_TARGETS` values to the correct ones.
+Then update the number of managers and subordinates of the AXI and AXI_lite xbars in the `config.vhd` file in the `selene_xilinx_vcu118` folder. You will need to modify the `CFG_AXI_N_INITIATORS`, `CFG_AXI_N_TARGETS`,`CFG_AXI_LITE_N_INITIATORS`, `CFG_AXI_LITE_N_TARGETS`  values to the correct ones.
 
 Then, go to the wrapper folder and check the `xbar_lite_wrapper.sv` and `xbar_wrapper.sv`, then answer the following questions in a file named `yourname_questions.txt`
 - Why does the AXI4 crossbar wrapper only have one address rule?
