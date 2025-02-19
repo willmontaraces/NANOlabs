@@ -11,6 +11,7 @@ The SoC that we will be integrating our accelerator in is the SELENE H2020 SoC r
 As you can observe, there is one accelerator instantiated in the above figure. That is the accelerator you will need to create and instantiate in the SoC. This accelerator is configured using the AXI_lite network. This network is accesed using an AHB to AXI_lite bridge represented in the figure as the AXI_lite block. Then, AXI_lite information travels through the AXI_lite xbar, where it is routed to its destination using a memory mapping mechanism.
 Now that we understand how the accelerator configuration connection is configured, I want to take a look at the accelerator connections to the AXI xbar. They appear as AXI connections in this figure, but, in reality, they are special connections.
 As the accelerator that we will program consumes 32-bit integers, it instantiates 32-bit wide AXI interfaces. However, our NoC uses 128-bit wide AXI interfaces. To adapt our accelerators we use AXI UP/Downsizers that are automatically instantiated when using the `axi_dw_wrapper`module found at `interconnect\libnoc\axi_width_converter.vhd`
+
 ![[axi_up_down_plain.png|400]]
 
 # Exercises
