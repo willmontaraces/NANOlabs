@@ -16,13 +16,18 @@ As the accelerator that we will program consumes 32-bit integers, it instantiate
 
 # Exercises
 ## Exercise 1. Generating an HLS kernel
-Using Vitis HLS and the previous session knowledge create an accelerator that takes two vectors (as pointers) and a length argument, and produces the dot product as a result. The dot product produced should be stored in the control registers to be read by the user using the control interface. Both vectors should be read using the AXI4 interface, with ports named `gmem_1` and `gmem_2` respectively.
+Using Vitis HLS and the previous session knowledge create an accelerator that takes two vectors (as pointers) and a length argument, and produces the dot product as a result. The dot product produced should be stored in the control registers to be read by the user using the control interface. 
+
+Both vectors should be read using the AXI4 interface, with ports named `gmem_1` and `gmem_2` respectively.
 Your HLS kernel interface should be the following:
 `uint32_t dot_prod_kernel(uint32_t* a, uint32_t* b, uint32_t length){}`
+
 Write your kernel and it's testbench, then test it and synthetize it.
 Once you have tested your kernel, synthetize it and check if it implements DSPs, if it does force Vitis to not do so by using the following pragma
 `#pragma HLS RESOURCE variable=result core=Mul_LUT`
+
 While DSPs are very beneficial for performance, we will be using a 3rd party simulator, where DSP behavior is not defined, as such, if any DSP is instantiated our accelerator will not work.
+
 **Upload your dot_prod_kernel.cpp file to poliformat as yourname_dot_prod_kernel.cpp**
 You will need the synthetized kernel files, so don't close Vitis HLS yet.
 ## Exercise 2. Integrating the accelerator into our target SoC
